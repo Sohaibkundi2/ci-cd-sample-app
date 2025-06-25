@@ -11,3 +11,8 @@ jobs:
       run: npx yarn
     - name: Build
       run: npx yarn build
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: assets
+        path: dist
