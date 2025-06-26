@@ -6,13 +6,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Install dependencies
-      run: npx yarn
-    - name: Build
-      run: npx yarn build
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: assets
-        path: dist
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npx yarn
+
+      - name: Build
+        run: npx yarn build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: assets
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
